@@ -1,0 +1,139 @@
+.vertical-navbar-container {
+  display: flex;
+  height: 100%;
+  position: relative;
+}
+
+.vertical-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 60px;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+  z-index: 20;
+}
+
+.navbar-links-container {
+  position: fixed;
+  top: 0;
+  left: 60px;
+  height: 100%;
+  width: 0;
+  background-color: black;
+  overflow: hidden;
+  transition: width 0.3s ease-in-out;
+  z-index: 10;
+}
+
+.navbar-links-container.open {
+  width: 200px;
+}
+
+.navbar-logo {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.navbar-links {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-left: 2rem;
+}
+
+.navbar-links a {
+  color: white;
+  font-size: 18px;
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar-links a:hover {
+  color: gray;
+}
+
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.social-links a {
+  color: white;
+  font-size: 24px;
+  transition: 0.3s ease-in-out;
+}
+
+.social-links a:hover {
+  color: grey;
+  transition: 0.3s ease-in-out;
+}
+
+.social-links img:hover {
+  opacity: 0.7;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.menu-icon {
+  cursor: pointer;
+}
+
+/* Media query for screens smaller than 768px (typically phones) */
+@media (max-width: 768px) {
+  .vertical-navbar-container {
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+  }
+
+  .vertical-navbar {
+    position: static;
+    width: 100%;
+    height: 60px;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px 20px;
+  }
+
+  .navbar-logo {
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+    font-size: 24px;
+    margin: 0;
+  }
+
+  .navbar-links-container {
+    position: static;
+    width: 100%;
+    height: 0;
+    background-color: black;
+    overflow: hidden;
+    transition: height 0.3s ease-in-out;
+  }
+
+  .navbar-links-container.open {
+    height: auto;
+  }
+  .navbar-links-container.open {
+    width: 100%;
+  }
+  .navbar-links {
+    flex-direction: row !important;
+    justify-content: space-around;
+    padding: 2rem 2rem 1rem 2rem;
+  }
+
+  .social-links {
+    flex-direction: row;
+    gap: 10px;
+  }
+}

@@ -75,6 +75,26 @@ export const Details = ({ id }) => {
     const walk = (x - container.startX) * 0.3; // Adjust this multiplier to slow down the dragging
     container.scrollLeft = container.scrollLeft - walk;
   };
+  // Touch Events for mobile (Android, iOS)
+  const handleTouchStart = (e) => {
+    const container = castContainerRef.current;
+    container.isDown = true;
+    container.startX = e.touches[0].pageX - container.offsetLeft;
+    container.scrollLeft = container.scrollLeft;
+  };
+
+  const handleTouchEnd = () => {
+    const container = castContainerRef.current;
+    container.isDown = false;
+  };
+
+  const handleTouchMove = (e) => {
+    const container = castContainerRef.current;
+    if (!container.isDown) return;
+    const x = e.touches[0].pageX - container.offsetLeft;
+    const walk = (x - container.startX) * 0.3;
+    container.scrollLeft = container.scrollLeft - walk;
+  };
 
   if (!movieDetails) {
     return <div>Loading...</div>;
@@ -121,6 +141,9 @@ export const Details = ({ id }) => {
             onMouseDown={handleMouseDown}
             onMouseLeave={handleMouseLeave}
             onMouseUp={handleMouseUp}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+            onTouchMove={handleTouchMove}
             onMouseMove={handleMouseMove}
           >
             {movieDetails.cast.map((actor) => (

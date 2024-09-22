@@ -165,5 +165,6 @@
   .dir-res-2 {
     font-size: 3rem !important;
     right: 0rem !important;
+    word-wrap: anywhere;
   }
 }

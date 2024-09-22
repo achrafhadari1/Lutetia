@@ -19,7 +19,7 @@ const Footer = () => {
             className="flex items-start gap-3"
           >
             <img
-              className="w-6 h-6 object-cover"
+              className="w-6 foot-res-1 h-6 object-cover"
               src="/Letterboxd_24.png"
               alt=""
             />
@@ -31,7 +31,11 @@ const Footer = () => {
             rel="noopener noreferrer"
             className="flex items-start gap-3"
           >
-            <img className="w-6 h-6 object-cover" src="/insta.png" alt="" />
+            <img
+              className="w-6 h-6 foot-res-1 object-cover"
+              src="/insta.png"
+              alt=""
+            />
             @Lutetia
           </a>{" "}
           <a
@@ -40,7 +44,11 @@ const Footer = () => {
             rel="noopener noreferrer"
             className="flex items-start gap-3"
           >
-            <img className="w-6 h-6 object-cover" src="/x.png" alt="" />
+            <img
+              className="w-6 h-6 foot-res-1 object-cover"
+              src="/x.png"
+              alt=""
+            />
             @Lutetia
           </a>
         </div>

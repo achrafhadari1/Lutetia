@@ -62,7 +62,8 @@
 @media (max-width: 780px) {
   .blog-res-1 {
     flex-direction: column;
-    width: 75%;
+    width: 100%;
+    align-items: center;
     margin: auto !important;
   }
   .card:not(:last-child) {

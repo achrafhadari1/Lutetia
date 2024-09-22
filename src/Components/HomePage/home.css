@@ -670,4 +670,11 @@
   .nw-res-1 {
     margin: auto;
   }
+  .foot-res-1 {
+    object-fit: contain !important;
+    width: 1rem !important;
+  }
+  .effect-three > a {
+    font-size: 13.6px !important;
+  }
 }

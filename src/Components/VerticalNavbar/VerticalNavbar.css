@@ -129,12 +129,15 @@
   .navbar-links {
     flex-direction: row !important;
     justify-content: space-around;
-    padding: 2rem 2rem 1rem 2rem;
+    padding: 2rem 2rem 1rem 1rem;
   }
 
   .social-links {
     flex-direction: row;
     gap: 10px;
+  }
+  .navbar-links a {
+    font-size: 16px !important;
   }
 }
 a.disabled {

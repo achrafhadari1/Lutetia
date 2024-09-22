@@ -234,17 +234,21 @@
     flex-direction: column !important;
     width: 100% !important;
   }
+  .text-base {
+    font-size: 12px !important;
+    padding: 7px;
+  }
   .text-3 {
     width: 80% !important;
     text-align: left;
     margin: auto;
-    font-size: 15px !important;
+    font-size: 12px !important;
   }
   .hs-res-5 {
     flex-direction: column-reverse;
   }
   .title-3 {
-    font-size: 5rem !important;
+    font-size: 4rem !important;
   }
   .hs-res-6 {
     width: 100% !important;

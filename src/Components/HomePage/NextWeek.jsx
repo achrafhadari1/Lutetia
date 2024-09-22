@@ -190,7 +190,7 @@ export const NextWeek = () => {
               {slides[currentSlide].logoSrc ? (
                 <img
                   src={slides[currentSlide].logoSrc}
-                  className="w-4/5"
+                  className="w-4/5 nw-res-1"
                   alt=""
                 />
               ) : (

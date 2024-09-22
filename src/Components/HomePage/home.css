@@ -624,6 +624,8 @@
   .responsive-merch-1 {
     flex-direction: column;
     margin-bottom: 2rem;
+    padding-top: 1rem;
+    gap: 1rem;
   }
   .responsive-merch-1 > div {
     margin: 0;
@@ -635,6 +637,8 @@
   }
   .newsletter-form {
     display: flex;
+    width: 18rem;
+    margin: auto;
   }
   .newsletter p {
     text-align: center;
@@ -658,5 +662,8 @@
   }
   .h-40-cus {
     display: none !important;
+  }
+  .nw-res-1 {
+    margin: auto;
   }
 }

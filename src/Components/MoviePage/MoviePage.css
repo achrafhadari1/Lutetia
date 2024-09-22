@@ -148,6 +148,9 @@
     text-align: right;
     width: 50%;
   }
+  .poster-mv {
+    display: none;
+  }
   .schedule-res-1 {
     flex-direction: column;
   }

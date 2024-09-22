@@ -4,7 +4,7 @@ import { FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { HiMenuAlt1 } from "react-icons/hi";
 import { FaMinus } from "react-icons/fa6";
-
+import { Link } from "react-router-dom";
 export const VerticalNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -49,11 +49,15 @@ export const VerticalNavbar = () => {
         }`}
       >
         <div className="navbar-links">
-          <a href="#">HOME</a>
-          <a href="#">HISTORY</a>
-          <a href="#">BLOG</a>
-          <a href="#">SHOP</a>
-          <a href="#">PRICES</a>
+          <Link to="/">HOME</Link>
+          <Link to="/history">HISTORY</Link>
+          <Link to="/blog">BLOG</Link>
+          <a href="#" className="disabled">
+            SHOP
+          </a>
+          <a className="disabled" href="#">
+            PRICES
+          </a>
         </div>
       </div>
     </div>

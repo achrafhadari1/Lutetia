@@ -527,7 +527,11 @@
 .button-4:hover .eff-4 {
   right: 0; /* Changed from left to right */
 }
-
+.nw-res-1 {
+  width: 80%;
+  height: 12rem;
+  object-fit: contain;
+}
 .button-4:hover a,
 .button-4:hover span {
   color: #000;

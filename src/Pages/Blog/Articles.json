@@ -1,0 +1,30 @@
+[
+  {
+    "title": "The Evolution of Spielberg's Cinematic Style",
+    "text": "From Jaws to Ready Player One, Spielberg has continuously reinvented his visual style to match the evolution of technology and narrative depth.",
+    "img": "https://img.buzzfeed.com/buzzfeed-static/static/2018-01/2/17/asset/buzzfeed-prod-fastlane-01/sub-buzz-15049-1514931566-3.png?downsize=1600%3A%2A&output-quality=auto&output-format=auto",
+    "author": "John Doe",
+    "duration": "2h30"
+  },
+  {
+    "title": "Dune: A Cinematic Odyssey",
+    "text": "Denis Villeneuve's 'Dune' is a breathtaking adaptation of Frank Herbert's classic, blending modern sci-fi visuals with deep, philosophical themes.",
+    "img": "https://hips.hearstapps.com/hmg-prod/images/dune-part-two-timothee-zendaya-6602e27089156.jpeg",
+    "author": "Jane Smith",
+    "duration": "1h45"
+  },
+  {
+    "title": "The Magic of Studio Ghibli",
+    "text": "Studio Ghibli has been enchanting audiences with its hand-drawn animation style, focusing on stories that blend fantasy with reality.",
+    "img": "https://media.wired.com/photos/64f9d24e1b27a741aa23c0dd/4:3/w_1384,h_1038,c_limit/Studio-Ghibli-Ranked-Culture-HERON_img_1.jpg",
+    "author": "Emily Watson",
+    "duration": "2h00"
+  },
+  {
+    "title": "A Look at Modern Indie Films",
+    "text": "Independent films have reshaped the cinema landscape, offering unique storytelling perspectives and fostering a new wave of filmmaking.",
+    "img": "https://www.hollywoodreporter.com/wp-content/uploads/2023/05/The-Sweet-East-image001-H-2023.jpg",
+    "author": "Alex Turner",
+    "duration": "1h30"
+  }
+]

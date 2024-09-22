@@ -3,6 +3,8 @@ import { Home } from "./Pages/Home";
 import { Routes, Route } from "react-router-dom";
 import { Movie } from "./Pages/Movie";
 import { VerticalNavbar } from "./Components/VerticalNavbar/VerticalNavbar";
+import { OurHistory } from "./Pages/Swiper/OurHistory";
+import { Blog } from "./Pages/Blog/Blog";
 
 export const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -48,6 +50,8 @@ export const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/movie/:id" element={<Movie />} />
+          <Route path="/history" element={<OurHistory />} />
+          <Route path="/blog" element={<Blog />} />
         </Routes>
       </div>
     </>

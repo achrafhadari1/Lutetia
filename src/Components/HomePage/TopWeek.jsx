@@ -6,7 +6,7 @@ import { MovieCompV2 } from "./MovieCompV2";
 
 const API_KEY = "716d704f44b5a3eff07788f36a04aed0"; // Replace with your TMDb API key
 
-const movieIds = [933260, 1226578]; // Replace with your list of movie IDs
+const movieIds = [933260, 1010639]; // Replace with your list of movie IDs
 
 export const TopWeek = () => {
   const [movies, setMovies] = useState([]);

@@ -28,7 +28,7 @@ export const NextWeek = () => {
     37: "Western",
   };
 
-  const filmIds = [1023922, 578]; // Define your film IDs here
+  const filmIds = [121986, 578]; // Define your film IDs here
 
   useEffect(() => {
     const fetchMovies = async () => {

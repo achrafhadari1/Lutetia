@@ -52,7 +52,7 @@ export const VerticalNavbar = () => {
           <Link to="/">HOME</Link>
           <Link to="/history">HISTORY</Link>
           <Link to="/blog">BLOG</Link>
-          <a href="/shop">SHOP</a>
+          <Link to="/shop">SHOP</Link>
         </div>
       </div>
     </div>

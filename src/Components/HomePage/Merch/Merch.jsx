@@ -1,6 +1,7 @@
 import React from "react";
 import { Item } from "./Item";
 import { GrNext } from "react-icons/gr";
+import { Link } from "react-router-dom";
 
 export const Merch = () => {
   const items = [
@@ -33,9 +34,9 @@ export const Merch = () => {
         <div className="text-4xl w-1/6 text-center font-medium pt-8 pl-12">
           MERCH
         </div>
-        <a href="/shop" rel="noopener noreferrer">
+        <Link to="/shop" rel="noopener noreferrer">
           <GrNext className="mt-8 mr-12  text-4xl  text-center" />
-        </a>
+        </Link>
       </div>
 
       <div className="flex responsive-merch-1 justify-evenly">

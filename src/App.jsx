@@ -5,6 +5,7 @@ import { Movie } from "./Pages/Movie";
 import { VerticalNavbar } from "./Components/VerticalNavbar/VerticalNavbar";
 import { OurHistory } from "./Pages/Swiper/OurHistory";
 import { Blog } from "./Pages/Blog/Blog";
+import Shop from "./Pages/Shop";
 
 export const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -52,6 +53,7 @@ export const App = () => {
           <Route path="/movie/:id" element={<Movie />} />
           <Route path="/history" element={<OurHistory />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/shop" element={<Shop />} />
         </Routes>
       </div>
     </>

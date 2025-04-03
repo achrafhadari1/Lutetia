@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { X } from "lucide-react";
 
 export const NextWeek = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [nextSlide, setNextSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [slides, setSlides] = useState([]);
+  const [showTrailer, setShowTrailer] = useState(false);
+
   const genreMap = {
     28: "Action",
     12: "Adventure",
@@ -28,7 +31,7 @@ export const NextWeek = () => {
     37: "Western",
   };
 
-  const filmIds = [121986, 578]; // Define your film IDs here
+  const filmIds = [1140535, 931349]; // Define your film IDs here
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -111,6 +114,16 @@ export const NextWeek = () => {
     fetchMovies();
   }, []);
 
+  const trailer = slides[currentSlide]?.videoSrc || null;
+
+  const handlePlayTrailer = () => {
+    if (trailer) {
+      setShowTrailer(true);
+    } else {
+      console.log("No trailer available");
+    }
+  };
+
   const handleSlideChange = (index) => {
     if (index !== currentSlide) {
       setNextSlide(index);
@@ -179,7 +192,10 @@ export const NextWeek = () => {
             />
             <div className="flex absolute top-6 right-6 items-center gap-4 mb-4">
               <div className="video-wrapper w-14 h-14 cursor-pointer">
-                <div className="play-button w-6 h-6 ml-1"></div>
+                <div
+                  onClick={handlePlayTrailer}
+                  className="play-button w-6 h-6 ml-1"
+                ></div>
               </div>
             </div>
           </div>
@@ -223,6 +239,25 @@ export const NextWeek = () => {
           </div>
         ))}
       </div>
+      {showTrailer && trailer && (
+        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+          <div className="relative w-full max-w-4xl aspect-video bg-black rounded-lg overflow-hidden">
+            <button
+              onClick={() => setShowTrailer(false)}
+              className="absolute top-4 right-4 z-10 bg-black/50 p-2 rounded-full hover:bg-black/80 transition-colors"
+            >
+              <X size={24} className="text-white" />
+            </button>
+            <iframe
+              src={trailer}
+              title="Movie Trailer"
+              className="w-full h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

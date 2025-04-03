@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
-import { MovieComponent } from "./MovieComponent";
 import { MovieCompV2 } from "./MovieCompV2";
 
 const API_KEY = "716d704f44b5a3eff07788f36a04aed0"; // Replace with your TMDb API key
 
-const movieIds = [933260, 1010639]; // Replace with your list of movie IDs
+const movieIds = [402431, 1010639]; // Replace with your list of movie IDs
 
 export const TopWeek = () => {
   const [movies, setMovies] = useState([]);
@@ -42,6 +41,14 @@ export const TopWeek = () => {
               },
             }
           );
+          const videoResponse = await axios.get(
+            `https://api.themoviedb.org/3/movie/${movieId}/videos`,
+            {
+              params: {
+                api_key: API_KEY,
+              },
+            }
+          );
 
           const director = creditsResponse.data.crew.find(
             (person) => person.job === "Director"
@@ -61,6 +68,7 @@ export const TopWeek = () => {
             ...movieDetailsResponse.data,
             director: director ? director.name : "Unknown",
             logo: logo,
+            videos: videoResponse,
           };
         });
 

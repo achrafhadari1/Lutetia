@@ -5,10 +5,6 @@ const Footer = () => {
     <footer className="footer border-t-2 flex flex-col  border-white">
       <div className="effect-three footer-links flex justify-between pl-24 pr-24 items-center mb-24">
         <div className="text-7xl">Lutetia</div>
-        <a href="#seances">Seances</a>
-        <a href="#prices">Prices</a>
-        <a href="#history">History</a>
-        <a href="#events">Events</a>
       </div>
       <div className="flex footer-responsive-1 justify-between pl-24 pr-24">
         <div className="effect-three  footer-socials flex  ">

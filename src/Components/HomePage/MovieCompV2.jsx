@@ -1,7 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Play, X } from "lucide-react"; // Assuming you have lucide-react installed
 
 export const MovieCompV2 = ({ movie }) => {
+  const [showTrailer, setShowTrailer] = useState(false);
+
+  const genres =
+    movie?.genres?.map((genre) => genre.name).join(", ") || "Genre unavailable";
+  const rating = movie?.vote_average
+    ? Math.round(movie.vote_average * 10)
+    : "N/A";
+  const imdbRating = movie?.vote_average?.toFixed(1) || "N/A";
+  const handlePlayTrailer = () => {
+    if (movie?.videos?.data?.results?.length > 0) {
+      setShowTrailer(true);
+    } else {
+      // You could add a toast notification here
+      console.log("No trailer available");
+    }
+  };
+  const trailer = movie?.videos?.data?.results?.find(
+    (video) => video.site === "YouTube" && video.type === "Trailer"
+  );
+
   console.log(movie);
   return (
     <div className="w-5/6 border-b-2 pb-4 border-white justify-around flex m-auto topWeekContainer">
@@ -20,22 +41,25 @@ export const MovieCompV2 = ({ movie }) => {
                 alt="Rotten Tomatoes"
                 className="w-4 h-4 mr-1"
               />
-              <span className="font-semibold">{movie.vote_average * 10}% </span>
+              <span className="font-semibold text-white">{rating}%</span>
             </div>
             <div className="flex items-center">
               <img src="imdb.png" alt="IMDB" className="w-10 h-4 mr-1" />
-              <span className="font-semibold">{movie.vote_average}</span>
+              <span className="font-semibold text-white">{imdbRating}</span>
             </div>
           </div>
 
-          <div className="text-lg font-light mb-2">
-            {movie.genres.map((genre) => genre.name).join(", ")} |{" "}
-            {movie.adult ? "18+" : "All ages"}
+          <div className="text-sm md:text-base font-medium mb-4 text-gray-300">
+            {genres} | {movie.adult ? "18+" : "All ages"}
           </div>
-          <p className="mb-4">{movie.overview}</p>
-
+          <p className="mb-6 text-gray-200 line-clamp-4 md:line-clamp-none">
+            {movie.overview || "No description available."}
+          </p>
           <div className="flex items-center gap-4 mb-4">
-            <div className="video-wrapper cursor-pointer">
+            <div
+              onClick={handlePlayTrailer}
+              className="video-wrapper cursor-pointer"
+            >
               <div className="play-button"></div>
             </div>
             <div className="text-sm">Play Trailer</div>
@@ -60,6 +84,25 @@ export const MovieCompV2 = ({ movie }) => {
           }}
         />
       </div>
+      {showTrailer && trailer && (
+        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+          <div className="relative w-full max-w-4xl aspect-video bg-black rounded-lg overflow-hidden">
+            <button
+              onClick={() => setShowTrailer(false)}
+              className="absolute top-4 right-4 z-10 bg-black/50 p-2 rounded-full hover:bg-black/80 transition-colors"
+            >
+              <X size={24} className="text-white" />
+            </button>
+            <iframe
+              src={`https://www.youtube.com/embed/${trailer.key}?autoplay=1`}
+              title={`${movie.title} Trailer`}
+              className="w-full h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

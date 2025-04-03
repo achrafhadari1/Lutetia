@@ -33,8 +33,11 @@ export const Merch = () => {
         <div className="text-4xl w-1/6 text-center font-medium pt-8 pl-12">
           MERCH
         </div>
-        <GrNext className="mt-8 mr-12  text-4xl  text-center" />
+        <a href="/shop" rel="noopener noreferrer">
+          <GrNext className="mt-8 mr-12  text-4xl  text-center" />
+        </a>
       </div>
+
       <div className="flex responsive-merch-1 justify-evenly">
         {items.map((item, index) => (
           <Item

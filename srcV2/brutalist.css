@@ -1,0 +1,496 @@
+/* Brutalist Architecture Styling */
+
+:root {
+  --brutalist-black: #000000;
+  --brutalist-white: #ffffff;
+  --brutalist-gray: #a1a1a1;
+  --brutalist-light-gray: #e0e0e0;
+  --brutalist-dark-gray: #333333;
+  --brutalist-accent: #ff2d55;
+}
+
+/* Base Styles */
+body {
+  background-color: var(--brutalist-black);
+  color: var(--brutalist-white);
+  font-family: 'Space Mono', monospace;
+  line-height: 1.2;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography */
+.brutalist-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 5rem;
+  letter-spacing: 0.2rem;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.brutalist-subtitle {
+  font-family: 'Space Mono', monospace;
+  font-size: 1rem;
+  letter-spacing: 0.2rem;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.1rem;
+  font-weight: 600;
+}
+
+p, .body-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+/* Architectural Grid and Layout */
+.brutalist-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 2rem;
+  position: relative;
+}
+
+.brutalist-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-gap: 2rem;
+  position: relative;
+}
+
+.brutalist-app {
+  position: relative;
+  min-height: 100vh;
+}
+
+.grid-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 8.33% 100%;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Loading Animation */
+.loading-line {
+  height: 1px;
+  background-color: var(--brutalist-white);
+  width: 0;
+  grid-column: 1 / -1;
+  animation: loadingLine 2s forwards;
+}
+
+@keyframes loadingLine {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* Navigation */
+.brutalist-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem 2rem;
+  z-index: 100;
+  mix-blend-mode: difference;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  letter-spacing: 0.1rem;
+  font-weight: 700;
+}
+
+.menu-toggle {
+  cursor: pointer;
+  font-family: 'Space Mono', monospace;
+  letter-spacing: 0.1rem;
+}
+
+.menu-icon {
+  border: 1px solid var(--brutalist-white);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+/* Fullscreen Menu */
+.brutalist-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--brutalist-black);
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 80vh;
+  width: 90%;
+  max-width: 1200px;
+}
+
+.menu-items {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.menu-item {
+  font-family: 'Playfair Display', serif;
+  font-size: 4.5rem;
+  letter-spacing: 0.1rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  line-height: 1.1;
+  font-weight: 700;
+  color: var(--brutalist-white);
+  text-decoration: none;
+}
+
+.menu-item:hover {
+  color: var(--brutalist-accent);
+}
+
+.menu-footer {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.1rem;
+  margin-top: 4rem;
+}
+
+/* Main Content */
+.brutalist-main {
+  position: relative;
+}
+
+/* Concrete Dividers */
+.concrete-divider {
+  height: 3rem;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAzMDAgMzAiPjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMzAiIGZpbGw9IiMzMzMiLz48cmVjdCB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIGZpbGw9IiM1NTUiLz48cmVjdCB4PSI1MCIgeT0iMTAiIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgZmlsbD0iIzIyMiIvPjxyZWN0IHg9IjEwMCIgeT0iMjAiIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgZmlsbD0iIzQ0NCIvPjxyZWN0IHg9IjE1MCIgeT0iNSIgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIiBmaWxsPSIjMzMzIi8+PHJlY3QgeD0iMjAwIiB5PSIxNSIgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIiBmaWxsPSIjNTU1Ii8+PHJlY3QgeD0iMjUwIiB5PSIyMCIgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIiBmaWxsPSIjMjIyIi8+PC9zdmc+');
+  background-size: 300px 30px;
+  margin: 3rem 0;
+  position: relative;
+}
+
+.concrete-divider.right {
+  transform: scaleX(-1);
+}
+
+.concrete-divider::before {
+  content: '';
+  position: absolute;
+  top: -1rem;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--brutalist-white);
+}
+
+.concrete-divider::after {
+  content: '';
+  position: absolute;
+  bottom: -1rem;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--brutalist-white);
+}
+
+/* Movie Poster Styles */
+.brutalist-button {
+  display: inline-block;
+  position: relative;
+  font-family: 'DM Sans', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.brutalist-button-inner {
+  display: inline-block;
+  border: 1px solid var(--brutalist-white);
+  padding: 1rem 2rem;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.brutalist-button:hover .brutalist-button-inner {
+  transform: translate(-4px, -4px);
+  background-color: var(--brutalist-white);
+  color: var(--brutalist-black);
+}
+
+.brutalist-button::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: -4px;
+  bottom: -4px;
+  border: 1px solid var(--brutalist-white);
+  z-index: -1;
+}
+
+.brutalist-frame {
+  border: 1px solid var(--brutalist-white);
+  padding: 2rem;
+  width: 100%;
+}
+
+.brutalist-time {
+  border: 1px solid var(--brutalist-white);
+  padding: 0.5rem;
+  text-align: center;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.brutalist-time:hover {
+  background-color: var(--brutalist-white);
+  color: var(--brutalist-black);
+}
+
+/* Movie Card Styles */
+.brutalist-movie-card {
+  position: relative;
+}
+
+.brutalist-movie-image {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--brutalist-white);
+}
+
+.brutalist-movie-image::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 4px;
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--brutalist-white);
+  z-index: -1;
+}
+
+.brutalist-button-small {
+  display: inline-block;
+  position: relative;
+  font-family: 'Space Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.brutalist-button-inner-small {
+  display: inline-block;
+  border: 1px solid var(--brutalist-white);
+  padding: 0.5rem 1rem;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.brutalist-button-small:hover .brutalist-button-inner-small {
+  transform: translate(-2px, -2px);
+  background-color: var(--brutalist-white);
+  color: var(--brutalist-black);
+}
+
+.brutalist-button-small::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: -2px;
+  bottom: -2px;
+  border: 1px solid var(--brutalist-white);
+  z-index: -1;
+}
+
+/* Gallery Styles */
+.brutalist-gallery {
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48cmVjdCB3aWR0aD0iODAiIGhlaWdodD0iODAiIGZpbGw9IiMxMTEiLz48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSIxIiBmaWxsPSIjMzMzIi8+PC9zdmc+');
+  background-size: 80px 80px;
+}
+
+.brutalist-gallery-title {
+  position: relative;
+  display: inline-block;
+}
+
+.brutalist-gallery-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--brutalist-white);
+}
+
+.brutalist-gallery-item {
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.brutalist-gallery-item:hover {
+  transform: scale(1.02);
+}
+
+.brutalist-image-frame {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+  overflow: hidden;
+  border: 1px solid var(--brutalist-white);
+}
+
+.brutalist-image-frame img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: filter 0.3s ease;
+}
+
+.brutalist-gallery-item:hover .brutalist-image-frame img {
+  filter: grayscale(0%) contrast(100%) !important;
+}
+
+.brutalist-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 2rem;
+}
+
+.brutalist-modal-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+  border: 1px solid var(--brutalist-white);
+}
+
+.brutalist-modal-image {
+  max-width: 100%;
+  max-height: 90vh;
+  display: block;
+}
+
+/* Footer Styles */
+.brutalist-footer {
+  border-top: 1px solid var(--brutalist-white);
+}
+
+.brutalist-footer-logo {
+  position: relative;
+  display: inline-block;
+}
+
+.brutalist-footer-logo::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 50%;
+  height: 1px;
+  background-color: var(--brutalist-white);
+}
+
+.brutalist-social-link {
+  display: block;
+  padding: 0.5rem 0;
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  letter-spacing: 0.05rem;
+  font-weight: 600;
+  transition: transform 0.2s ease;
+}
+
+.brutalist-social-link:hover {
+  transform: translateX(10px);
+}
+
+/* Blog Styles */
+.brutalist-blog-card {
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.brutalist-blog-card:hover {
+  transform: translateY(-10px);
+}
+
+/* Merch Styles */
+.brutalist-filter {
+  padding: 0.5rem 1rem;
+  transition: border-color 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .brutalist-title {
+    font-size: 3rem;
+  }
+  
+  .menu-item {
+    font-size: 3rem;
+  }
+  
+  .concrete-divider {
+    height: 2rem;
+  }
+  
+  .brutalist-gallery-item {
+    col-span: 6 !important;
+  }
+  
+  .brutalist-footer .col-span-4 {
+    grid-column: span 12;
+    margin-bottom: 2rem;
+  }
+  
+  .brutalist-footer-bottom {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

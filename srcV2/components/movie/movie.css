@@ -1,0 +1,106 @@
+/* Movie Page Brutalist Styling */
+
+.brutalist-movie-page {
+  position: relative;
+  background-color: var(--brutalist-black);
+  color: var(--brutalist-white);
+  min-height: 100vh;
+}
+
+.brutalist-movie-hero {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Cast Scroll Container */
+.brutalist-cast-scroll {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.brutalist-cast-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Details Grid */
+.brutalist-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+/* Poster Frame */
+.brutalist-poster-frame {
+  position: relative;
+  padding: 2rem;
+  background-color: var(--brutalist-white);
+  border: 1px solid var(--brutalist-black);
+}
+
+/* Cast Card */
+.brutalist-cast-card {
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.brutalist-cast-card:hover {
+  transform: translateY(-10px);
+}
+
+.brutalist-cast-image {
+  position: relative;
+  z-index: 2;
+  border: 1px solid var(--brutalist-black);
+  overflow: hidden;
+}
+
+/* Director Section */
+.brutalist-director {
+  position: relative;
+}
+
+.brutalist-director-bio {
+  position: relative;
+  padding-left: 2rem;
+  border-left: 1px solid var(--brutalist-white);
+}
+
+.brutalist-director-image-container {
+  position: relative;
+}
+
+/* Trailer Section */
+.brutalist-trailer {
+  position: relative;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .brutalist-details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .brutalist-cast-container {
+    padding: 0 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .brutalist-movie-hero h1 {
+    font-size: 3rem;
+  }
+
+  .brutalist-director-name {
+    font-size: 3rem;
+  }
+}

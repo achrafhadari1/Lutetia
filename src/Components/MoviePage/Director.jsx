@@ -3,6 +3,7 @@ import axios from "axios";
 
 export const Director = ({ id }) => {
   const [director, setDirector] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchDirector = async () => {
@@ -33,20 +34,35 @@ export const Director = ({ id }) => {
 
           setDirector(personResponse.data);
         }
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching director information:", error);
+        setLoading(false);
       }
     };
 
     fetchDirector();
   }, [id]);
 
+  if (loading) {
+    return (
+      <div className="h-40 flex items-center justify-center">
+        Loading director information...
+      </div>
+    );
+  }
+
   if (!director) {
-    return <div>Loading...</div>;
+    return (
+      <div className="h-40 flex items-center justify-center">
+        Director information not available
+      </div>
+    );
   }
 
   // Function to format the biography into paragraphs
   const formatBiography = (bio) => {
+    if (!bio) return [];
     const sentences = bio.split(". ");
     let paragraphs = [];
     for (let i = 0; i < sentences.length; i += 3) {
@@ -59,34 +75,63 @@ export const Director = ({ id }) => {
   };
 
   return (
-    <div className="w-full border-b-2">
-      <div className="w-2/3 m-auto pt-32 pb-52 ">
-        <div className=" text-left text-7xl font-semibold mb-24">
-          About Director
-        </div>
-        <div className="flex w-full dir-res-1 gap-44">
-          <div className="w-1/2">
-            {director.biography ? (
-              formatBiography(director.biography).map((paragraph, index) => (
-                <p key={index} className="mb-4">
-                  {paragraph}
-                </p>
-              ))
-            ) : (
-              <p>No biography available for this director.</p>
-            )}
+    <div className="brutalist-director relative bg-black py-20">
+      <div className="brutalist-container">
+        <div className="grid grid-cols-12 gap-8">
+          <div className="col-span-12 mb-8">
+            <div className="flex items-center">
+              <div className="h-[1px] flex-grow bg-white"></div>
+              <h2 className="text-5xl px-8 font-heading tracking-widest">
+                THE DIRECTOR
+              </h2>
+              <div className="h-[1px] flex-grow bg-white"></div>
+            </div>
           </div>
-          <div className="relative">
-            {director.profile_path ? (
-              <img
-                src={`https://image.tmdb.org/t/p/original${director.profile_path}`}
-                alt={director.name}
-              />
-            ) : (
-              <div>No image available</div>
-            )}
-            <div className="absolute top-1/3 dir-res-2 silk-font right-28 text-9xl w-full">
-              {director.name.toUpperCase()}
+
+          <div className="col-span-7 col-start-1">
+            <div className="brutalist-director-bio">
+              <div className="font-serif text-lg">
+                {formatBiography(director.biography).length > 0 ? (
+                  formatBiography(director.biography).map(
+                    (paragraph, index) => (
+                      <p key={index} className="mb-8">
+                        {paragraph}
+                      </p>
+                    )
+                  )
+                ) : (
+                  <p>No biography available for this director.</p>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className="col-span-4 col-start-9">
+            <div className="brutalist-director-image-container relative">
+              <div className="brutalist-history-image">
+                {director.profile_path ? (
+                  <img
+                    src={`https://image.tmdb.org/t/p/original${director.profile_path}`}
+                    alt={director.name}
+                    className="w-full"
+                    style={{ filter: "grayscale(100%) contrast(120%)" }}
+                  />
+                ) : (
+                  <div className="h-96 bg-gray-800 flex items-center justify-center">
+                    No image available
+                  </div>
+                )}
+                <div className="brutalist-image-border"></div>
+              </div>
+
+              <div className="brutalist-director-name font-heading text-6xl tracking-widest mt-8">
+                {director.name.toUpperCase()}
+              </div>
+
+              <div className="font-mono text-sm uppercase tracking-wider mt-4">
+                {director.birthday && `Born: ${director.birthday}`}
+                {director.place_of_birth && ` • ${director.place_of_birth}`}
+              </div>
             </div>
           </div>
         </div>

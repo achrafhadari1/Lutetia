@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 import { MovieCompV2 } from "./MovieCompV2";
 
-const API_KEY = "716d704f44b5a3eff07788f36a04aed0"; // Replace with your TMDb API key
-
-const movieIds = [402431, 1010639]; // Replace with your list of movie IDs
+const API_KEY = "716d704f44b5a3eff07788f36a04aed0";
+const movieIds = [402431, 1010639];
 
 export const TopWeek = () => {
   const [movies, setMovies] = useState([]);
@@ -83,19 +81,23 @@ export const TopWeek = () => {
   }, []);
 
   return (
-    <div className="pb-7 z-20 relative ">
-      <div className="flex justify-between">
-        <div className="weekTitle w-5/6 m-auto ">PLAYING THIS WEEK</div>
-      </div>
-      <div
-        className="moviesContainer mt-2 flex flex-col w-full gap-4"
-        style={{ overflowX: "hidden", position: "relative" }}
-      >
-        {movies.map((movie, index) => (
-          <div key={index} className="movieWrapper">
-            <MovieCompV2 movie={movie} />
+    <div className="brutalist-this-week py-20 relative">
+      <div className="brutalist-container">
+        <div className="grid grid-cols-12 gap-8">
+          <div className="col-span-12 mb-12">
+            <div className="flex items-center">
+              <div className="h-[1px] flex-grow bg-white"></div>
+              <h2 className="text-5xl px-8 font-heading tracking-widest">THIS WEEK</h2>
+              <div className="h-[1px] flex-grow bg-white"></div>
+            </div>
           </div>
-        ))}
+          
+          {movies.map((movie, index) => (
+            <div key={index} className={`col-span-6 ${index % 2 === 0 ? 'col-start-1' : 'col-start-7'}`}>
+              <MovieCompV2 movie={movie} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -1,9 +1,11 @@
 import React, { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import { Cast } from "./Cast";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export const Details = ({ id }) => {
   const [movieDetails, setMovieDetails] = useState(null);
+  const [loading, setLoading] = useState(true);
   const castContainerRef = useRef(null);
 
   useEffect(() => {
@@ -26,11 +28,14 @@ export const Details = ({ id }) => {
         const movie = movieResponse.data;
         const genreNames = movie.genres.map((genre) => genre.name).join(", ");
 
-        const cast = creditsResponse.data.cast.map((actor) => ({
-          name: actor.name,
-          character: actor.character,
-          profilePath: actor.profile_path,
-        }));
+        const cast = creditsResponse.data.cast
+          .slice(0, 15) // Limit to first 15 cast members
+          .map((actor) => ({
+            id: actor.id,
+            name: actor.name,
+            character: actor.character,
+            profilePath: actor.profile_path,
+          }));
 
         const movieDetails = {
           originalLanguage: movie.original_language,
@@ -39,128 +44,172 @@ export const Details = ({ id }) => {
           runtime: movie.runtime,
           posterPath: movie.poster_path,
           cast: cast,
+          budget: movie.budget,
+          revenue: movie.revenue,
+          productionCompanies: movie.production_companies,
         };
-        console.log(movieDetails);
+
         setMovieDetails(movieDetails);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching movie details:", error);
+        setLoading(false);
       }
     };
 
     fetchMovieDetails();
   }, [id]);
 
-  const handleMouseDown = (e) => {
-    const container = castContainerRef.current;
-    container.isDown = true;
-    container.startX = e.pageX - container.offsetLeft;
-    container.scrollLeft = container.scrollLeft;
+  // Scroll functions for cast slider
+  const scrollLeft = () => {
+    if (castContainerRef.current) {
+      castContainerRef.current.scrollBy({ left: -400, behavior: "smooth" });
+    }
   };
 
-  const handleMouseLeave = () => {
-    const container = castContainerRef.current;
-    container.isDown = false;
+  const scrollRight = () => {
+    if (castContainerRef.current) {
+      castContainerRef.current.scrollBy({ left: 400, behavior: "smooth" });
+    }
   };
 
-  const handleMouseUp = () => {
-    const container = castContainerRef.current;
-    container.isDown = false;
-  };
-
-  const handleMouseMove = (e) => {
-    const container = castContainerRef.current;
-    if (!container.isDown) return;
-    e.preventDefault();
-    const x = e.pageX - container.offsetLeft;
-    const walk = (x - container.startX) * 0.3; // Adjust this multiplier to slow down the dragging
-    container.scrollLeft = container.scrollLeft - walk;
-  };
-  // Touch Events for mobile (Android, iOS)
-  const handleTouchStart = (e) => {
-    const container = castContainerRef.current;
-    container.isDown = true;
-    container.startX = e.touches[0].pageX - container.offsetLeft;
-    container.scrollLeft = container.scrollLeft;
-  };
-
-  const handleTouchEnd = () => {
-    const container = castContainerRef.current;
-    container.isDown = false;
-  };
-
-  const handleTouchMove = (e) => {
-    const container = castContainerRef.current;
-    if (!container.isDown) return;
-    const x = e.touches[0].pageX - container.offsetLeft;
-    const walk = (x - container.startX) * 0.3;
-    container.scrollLeft = container.scrollLeft - walk;
-  };
-
-  if (!movieDetails) {
-    return <div>Loading...</div>;
+  if (loading) {
+    return (
+      <div className="h-40 flex items-center justify-center">
+        Loading movie details...
+      </div>
+    );
   }
 
+  if (!movieDetails) {
+    return (
+      <div className="h-40 flex items-center justify-center">
+        Movie details not available
+      </div>
+    );
+  }
+
+  // Format currency
+  const formatCurrency = (amount) => {
+    if (!amount) return "N/A";
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 0,
+    }).format(amount);
+  };
+
   return (
-    <div className="flex justify-between bg-white text-black">
-      <div className="w-8/12 details-res-1">
-        <div className="w-3/4 details-res-2 ml-auto mr-28">
-          <div className="w-3/4 text-left mb-10 pt-10 text-7xl font-semibold">
-            Details
+    <div className="brutalist-details bg-white text-black py-20">
+      <div className="brutalist-container">
+        <div className="grid grid-cols-12 gap-8">
+          <div className="col-span-7">
+            <div className="brutalist-details-section">
+              <h2 className="font-heading text-5xl tracking-wider mb-12 text-black">
+                DETAILS
+              </h2>
+
+              <div className="brutalist-details-grid grid gap-6">
+                <div className="brutalist-details-item border-t-2 border-black pt-4">
+                  <div className="font-heading text-3xl mb-2">
+                    ORIGINAL LANGUAGE
+                  </div>
+                  <div className="font-serif text-xl">
+                    {movieDetails.originalLanguage === "en"
+                      ? "English"
+                      : movieDetails.originalLanguage}
+                  </div>
+                </div>
+
+                <div className="brutalist-details-item border-t-2 border-black pt-4">
+                  <div className="font-heading text-3xl mb-2">GENRE</div>
+                  <div className="font-serif text-xl">
+                    {movieDetails.genres}
+                  </div>
+                </div>
+
+                <div className="brutalist-details-item border-t-2 border-black pt-4">
+                  <div className="font-heading text-3xl mb-2">RELEASE DATE</div>
+                  <div className="font-serif text-xl">
+                    {movieDetails.releaseDate}
+                  </div>
+                </div>
+
+                <div className="brutalist-details-item border-t-2 border-black pt-4">
+                  <div className="font-heading text-3xl mb-2">RUNTIME</div>
+                  <div className="font-serif text-xl">
+                    {Math.floor(movieDetails.runtime / 60)}h{" "}
+                    {movieDetails.runtime % 60}m
+                  </div>
+                </div>
+
+                <div className="brutalist-details-item border-t-2 border-black pt-4">
+                  <div className="font-heading text-3xl mb-2">BUDGET</div>
+                  <div className="font-serif text-xl">
+                    {formatCurrency(movieDetails.budget)}
+                  </div>
+                </div>
+
+                <div className="brutalist-details-item border-t-2 border-black pt-4">
+                  <div className="font-heading text-3xl mb-2">REVENUE</div>
+                  <div className="font-serif text-xl">
+                    {formatCurrency(movieDetails.revenue)}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className=" details-res-3 flex justify-between items-center">
-            <div className="text-5xl font-medium">Original Language</div>
-            {movieDetails.originalLanguage == "en" ? (
-              <div className="text-xl">English</div>
-            ) : (
-              <div className="text-xl">{movieDetails.originalLanguage}</div>
-            )}
+
+          <div className="col-span-5">
+            <div className="brutalist-poster-frame relative">
+              <img
+                src={`https://image.tmdb.org/t/p/original${movieDetails.posterPath}`}
+                alt=""
+                className="w-full relative z-10"
+              />
+              <div className="absolute top-4 left-4 right-4 bottom-4 border-2 border-black z-0"></div>
+            </div>
           </div>
-          <div className="flex justify-between items-center">
-            <div className="text-5xl font-medium">Genre</div>
-            <div className=" details-res-4 text-xl">{movieDetails.genres}</div>
-          </div>
-          <div className="flex justify-between items-center">
-            <div className="text-5xl font-medium">Release Date</div>
-            <div className="text-xl">{movieDetails.releaseDate}</div>
-          </div>
-          <div className="flex justify-between items-center">
-            <div className="text-5xl font-medium">Runtime</div>
-            <div className="text-xl">
-              {Math.floor(movieDetails.runtime / 60)}h{" "}
-              {movieDetails.runtime % 60}m
+
+          <div className="col-span-12 mt-16">
+            <h2 className="font-heading text-5xl tracking-wider mb-12 text-black">
+              CAST
+            </h2>
+
+            <div className="brutalist-cast-container relative">
+              <button
+                onClick={scrollLeft}
+                className="absolute left-0 top-1/2 transform -translate-y-1/2 z-20 bg-black text-white p-2"
+                aria-label="Scroll left"
+              >
+                <ArrowLeft size={24} />
+              </button>
+
+              <div
+                ref={castContainerRef}
+                className="brutalist-cast-scroll flex overflow-x-auto gap-4 pb-4 hide-scrollbar"
+              >
+                {movieDetails.cast.map((actor) => (
+                  <Cast
+                    key={actor.id}
+                    name={actor.name}
+                    character={actor.character}
+                    profilePath={actor.profilePath}
+                  />
+                ))}
+              </div>
+
+              <button
+                onClick={scrollRight}
+                className="absolute right-0 top-1/2 transform -translate-y-1/2 z-20 bg-black text-white p-2"
+                aria-label="Scroll right"
+              >
+                <ArrowRight size={24} />
+              </button>
             </div>
           </div>
         </div>
-        <div>
-          <div className="w-3/4 ml-auto  mr-28 text-left mb-10 pt-10 text-7xl font-semibold">
-            Cast
-          </div>
-          <div
-            ref={castContainerRef}
-            className="ml-14 flex w-full draggable"
-            onMouseDown={handleMouseDown}
-            onMouseLeave={handleMouseLeave}
-            onMouseUp={handleMouseUp}
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
-            onTouchMove={handleTouchMove}
-            onMouseMove={handleMouseMove}
-          >
-            {movieDetails.cast.map((actor) => (
-              <Cast
-                key={actor.name}
-                name={actor.name}
-                profilePath={actor.profilePath}
-              />
-            ))}
-          </div>
-        </div>
       </div>
-      <img
-        src={`https://image.tmdb.org/t/p/original${movieDetails.posterPath}`}
-        alt=""
-        className="w-1/3 z-20 relative poster-mv object-cover"
-      />
     </div>
   );
 };

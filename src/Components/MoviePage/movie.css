@@ -8,15 +8,34 @@
 }
 
 .brutalist-movie-hero {
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+}
+
+/* Movie Hero Content */
+.brutalist-movie-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 8rem 4rem 4rem;
+}
+
+.brutalist-movie-description {
+  font-family: "Playfair Display", serif;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  margin-bottom: 3rem;
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Cast Scroll Container */
 .brutalist-cast-scroll {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .brutalist-cast-scroll::-webkit-scrollbar {

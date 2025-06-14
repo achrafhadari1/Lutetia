@@ -1,33 +1,32 @@
-export const Cast = ({ name, profilePath }) => {
+import React from "react";
+
+export const Cast = ({ name, character, profilePath }) => {
   return (
-    <div className="relative w-64 h-96 object-cover flex-shrink-0 bg-rgba  text-white">
-      {profilePath !== null ? (
-        <>
-          <img
-            className="actor-image absolute w-full h-full z-0 mask-image"
-            src={`https://image.tmdb.org/t/p/original${profilePath}`}
-            alt={name}
-          />
-          <div className="effect-three z-20 w-full h-full flex justify-center pb-4 items-end relative">
-            <a href="#" className="text-xl">
-              {name}
-            </a>
-          </div>
-        </>
-      ) : (
-        <>
-          <img
-            className="actor-image absolute w-full h-full z-0 mask-image"
-            src={`https://live.staticflickr.com/65535/49402101732_1302c9a6fb_b.jpg`}
-            alt={name}
-          />
-          <div className="effect-three z-20 w-full h-full flex justify-center pb-4 items-end relative">
-            <a href="#" className="text-xl">
-              {name}
-            </a>
-          </div>
-        </>
-      )}
+    <div className="brutalist-cast-card flex-shrink-0 w-64">
+      <div className="brutalist-cast-image-container relative mb-4">
+        <div className="brutalist-cast-image">
+          {profilePath ? (
+            <img
+              src={`https://image.tmdb.org/t/p/original${profilePath}`}
+              alt={name}
+              className="w-full h-80 object-cover"
+              style={{ filter: "grayscale(100%) contrast(120%)" }}
+            />
+          ) : (
+            <div className="w-full h-80 bg-gray-800 flex items-center justify-center">
+              No image
+            </div>
+          )}
+        </div>
+        <div className="absolute top-2 left-2 right-2 bottom-2 border border-black z-0"></div>
+      </div>
+
+      <div className="brutalist-cast-info">
+        <div className="font-heading text-xl text-black mb-1">{name}</div>
+        {character && (
+          <div className="font-mono text-sm text-gray-700">as {character}</div>
+        )}
+      </div>
     </div>
   );
 };
